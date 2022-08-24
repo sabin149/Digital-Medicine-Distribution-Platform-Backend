@@ -11,11 +11,7 @@ const compression = require('compression');
 const app = express();
 
 app.use(express.json());
-app.use(cors(
-  {
-    origin: "https://frontend-emedicine-platform.herokuapp.com",
-    credentials: true,
-  }));
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"))
