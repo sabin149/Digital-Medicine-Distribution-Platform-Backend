@@ -85,7 +85,7 @@ const userCTRL = {
       if (user.status === false) {
         const secret = user._id + process.env.ACCESS_TOKEN_SECRET;
         const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' });
-        const link = `http://localhost:3000/verify-user/${user._id}/${token}`;
+        const link = `https://frontend-emedicine-platform.herokuapp.com/verify-user/${user._id}/${token}`;
         // console.log(link)
 
         // console.log("<------------------------------------------>")
@@ -219,7 +219,7 @@ const userCTRL = {
         if (user) {
           const secret = user._id + process.env.ACCESS_TOKEN_SECRET;
           const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' });
-          const link = `http://localhost:3000/reset-password/${user._id}/${token}`;
+          const link = `https://frontend-emedicine-platform.herokuapp.com/reset-password/${user._id}/${token}`;
           console.log(link)
 
           console.log("<------------------------------------------>")
@@ -289,7 +289,7 @@ const userCTRL = {
       res.status(500).send({ status: "failed", msg: error.message })
     }
   },
-  approveHotel: async (req, res) => {
+  approveVendor: async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.id })
         if (user.vendorStatus === false) {
