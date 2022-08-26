@@ -219,7 +219,7 @@ const userCTRL = {
         if (user) {
           const secret = user._id + process.env.ACCESS_TOKEN_SECRET;
           const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' });
-          const link = `https://frontend-emedicine-platform.herokuapp.com/reset-password/${user._id}/${token}`;
+          const link = `http://localhost:3000/reset-password/${user._id}/${token}`;
           console.log(link)
 
           console.log("<------------------------------------------>")
