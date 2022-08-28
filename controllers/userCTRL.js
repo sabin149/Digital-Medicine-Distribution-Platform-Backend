@@ -9,7 +9,6 @@ const userCTRL = {
     try {
       const { fullName, userName, email, password, rePassword, role, shopName } =
         req.body;
-
       if (!fullName || !userName || !email || !password || !rePassword) {
         return res.status(400).json({ msg: "Invalid Creadentials." });
       }
@@ -27,7 +26,6 @@ const userCTRL = {
       if (existingShop) {
         return res.status(400).json({ msg: "Medical Store Already Exists." });
       }}
-
       if (password.length < 6) {
         return res
           .status(400)
