@@ -11,10 +11,21 @@ const compression = require('compression');
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin: "https://frontend-emedicine-platform.herokuapp.com",
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: "https://frontend-emedicine-platform.herokuapp.com",
+//   credentials: true,
+// }));
+
+var whitelist = ['https://frontend-emedicine-platform.herokuapp.com', 'https://frontend-emedicine-platform.netlify.app/']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"))
@@ -27,11 +38,11 @@ app.use(
 app.use(helmet())
 app.use(compression());
 
-app.use("/user", require("./routes/userRouter"));
-app.use("/api", require("./routes/categoryRouter"));
-app.use("/api", require("./routes/productRouter"));
-app.use("/api", require("./routes/upload"));
-app.use("/api", require("./routes/orderRouter"));
+app.use("/user",cors(corsOptions), require("./routes/userRouter"));
+app.use("/api",cors(corsOptions), require("./routes/categoryRouter"));
+app.use("/api",cors(corsOptions), require("./routes/productRouter"));
+app.use("/api",cors(corsOptions), require("./routes/upload"));
+app.use("/api",cors(corsOptions), require("./routes/orderRouter"));
 
 const URI = process.env.MONGO_URL;
 const PORT = process.env.PORT;

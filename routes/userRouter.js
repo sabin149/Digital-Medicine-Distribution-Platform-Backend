@@ -18,3 +18,4 @@ router.post("/reset-password/:id/:token", userCTRL.resetUserPassword);
 router.get("/verify-user/:id/:token", userCTRL.verifyUser);
 
 module.exports = router;
+
