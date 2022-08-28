@@ -36,8 +36,8 @@ const userSchema = mongoose.Schema(
     shopName: {
       type: String,
       trim: true,
-      unique: true,
       default: "",
+      unique: true
     },
     status: {
       type: Boolean,

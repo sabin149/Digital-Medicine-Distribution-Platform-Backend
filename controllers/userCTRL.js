@@ -21,6 +21,13 @@ const userCTRL = {
       if (existingEmail) {
         return res.status(400).json({ msg: "Email Already Exists." });
       }
+      if(shopName){
+      const existingShop = await User.findOne({ shopName });
+      console.log(existingShop);
+      if (existingShop) {
+        return res.status(400).json({ msg: "Medical Store Already Exists." });
+      }}
+
       if (password.length < 6) {
         return res
           .status(400)
