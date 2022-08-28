@@ -7,6 +7,7 @@ const fileUpload = require("express-fileupload");
 const morgan = require("morgan")
 const helmet = require('helmet');
 const compression = require('compression');
+const path = require('path');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.use(express.json());
 //   credentials: true,
 // }));
 
-var whitelist = ['https://frontend-emedicine-platform.herokuapp.com', 'https://frontend-emedicine-platform.netlify.app/']
+var whitelist = ['https://frontend-emedicine-platform.herokuapp.com', 'https://frontend-emedicine-platform.netlify.app', 'http://localhost:3000', 'http://localhost:5000']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -60,16 +61,17 @@ mongoose.connect(
   }
 );
 
-app.listen(PORT, () => {
-  console.log(`SERVER IS CONNECTED TO PORT ${PORT}`);
-});
+app.use(express.static(path.join(path.join(__dirname,"./build"))));
 
-app.route('/')
-  .get(function (req, res) {
-    res.sendFile(process.cwd() + '/index.html');
-  });
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,"./build/index.html"))
+})
 
 app.use(function (req, res, next) {
   res.status(404);
   res.send('404 Not Found');
 })
+
+app.listen(PORT, () => {
+  console.log(`SERVER IS CONNECTED TO PORT ${PORT}`);
+});
