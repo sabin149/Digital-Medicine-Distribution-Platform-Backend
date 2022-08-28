@@ -12,11 +12,10 @@ const path = require('path');
 const app = express();
 
 app.use(express.json());
-// app.use(cors({
-//   origin: "https://frontend-emedicine-platform.herokuapp.com",
-//   credentials: true,
-// }));
-app.use(cors());
+app.use(cors({
+  origin: "https://frontend-emedicine-platform.herokuapp.com",
+  credentials: true,
+}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"))
@@ -29,11 +28,11 @@ app.use(
 app.use(helmet())
 app.use(compression());
 
-app.use("/user",cors(), require("./routes/userRouter"));
-app.use("/api",cors(), require("./routes/categoryRouter"));
-app.use("/api",cors(), require("./routes/productRouter"));
-app.use("/api",cors(), require("./routes/upload"));
-app.use("/api",cors(), require("./routes/orderRouter"));
+app.use("/user", require("./routes/userRouter"));
+app.use("/api", require("./routes/categoryRouter"));
+app.use("/api", require("./routes/productRouter"));
+app.use("/api", require("./routes/upload"));
+app.use("/api", require("./routes/orderRouter"));
 
 const URI = process.env.MONGO_URL;
 const PORT = process.env.PORT;
