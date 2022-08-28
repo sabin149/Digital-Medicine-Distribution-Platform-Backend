@@ -16,17 +16,7 @@ app.use(express.json());
 //   origin: "https://frontend-emedicine-platform.herokuapp.com",
 //   credentials: true,
 // }));
-
-var whitelist = ['https://frontend-emedicine-platform.herokuapp.com',"https://backend-emedicine-platform.herokuapp.com", 'https://frontend-emedicine-platform.netlify.app', 'http://localhost:3000', 'http://localhost:5000']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"))
@@ -39,11 +29,11 @@ app.use(
 app.use(helmet())
 app.use(compression());
 
-app.use("/user",cors(corsOptions), require("./routes/userRouter"));
-app.use("/api",cors(corsOptions), require("./routes/categoryRouter"));
-app.use("/api",cors(corsOptions), require("./routes/productRouter"));
-app.use("/api",cors(corsOptions), require("./routes/upload"));
-app.use("/api",cors(corsOptions), require("./routes/orderRouter"));
+app.use("/user",cors(), require("./routes/userRouter"));
+app.use("/api",cors(), require("./routes/categoryRouter"));
+app.use("/api",cors(), require("./routes/productRouter"));
+app.use("/api",cors(), require("./routes/upload"));
+app.use("/api",cors(), require("./routes/orderRouter"));
 
 const URI = process.env.MONGO_URL;
 const PORT = process.env.PORT;
