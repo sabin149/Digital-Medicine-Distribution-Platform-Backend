@@ -17,7 +17,7 @@ app.use(express.json());
 //   credentials: true,
 // }));
 
-var whitelist = ['https://frontend-emedicine-platform.herokuapp.com', 'https://frontend-emedicine-platform.netlify.app', 'http://localhost:3000', 'http://localhost:5000']
+var whitelist = ['https://frontend-emedicine-platform.herokuapp.com',"https://backend-emedicine-platform.herokuapp.com", 'https://frontend-emedicine-platform.netlify.app', 'http://localhost:3000', 'http://localhost:5000']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
