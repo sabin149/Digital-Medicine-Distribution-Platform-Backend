@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://frontend-emedicine-platform.herokuapp.com/",
+  origin: "https://frontend-emedicine-platform.herokuapp.com",
   credentials: true,
 }));
 
